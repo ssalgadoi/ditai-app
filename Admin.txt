@@ -1,0 +1,5 @@
+Username : AdminDITAI
+Email address: ditai@ditai.com
+Password: 123456
+
+para instalar:pip install -r requirements.txt

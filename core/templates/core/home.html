@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Inicio - DITAI Ingeniería{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+            <!-- Imágenes -->
+            <div class="carousel-inner">
+                {% for service in services %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-img-container">
+                        <img src="{{ service.imagen.url }}" class="d-block w-100" alt="Imagen de {{ service.nombre }}">
+                        <!-- <h3 class="carousel-title">{{ service.title }}</h3>  -->
+                        <div class="carousel-caption d-md-block">
+                            <div class="black-bar">
+                                <h2>Bienvenido a DITAI Ingeniería</h2>
+                                <p>Ofrecemos soluciones innovadoras en ingeniería civil, eléctrica y estructural.</p>
+                                <a href="{% url 'core:service_detail' service.id %}" class="carousel__link">
+                                    <h3>{{ service.title }}</h3>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Botones de navegación -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+
+
+    </section>
+
+
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="about">
+        <!-- Contenido de texto -->
+        <div id="about" class="about__content">
+            <!-- Imagen mosaico animada -->
+            <h1 class="title__services">Nosotros</h1>
+
+            <h2 class="about__subtitle">DITAI INGENIERÍA</h2>
+            <p class="about__text">
+                Ubicados en Buin, Región Metropolitana, somos una empresa de profesionales senior con más de 25 años de
+                experiencia en la Industria del Chancado, Cementera, Prefabricados, Construcción, Energía y Minería.
+                Nuestro objetivo es contribuir al desarrollo económico y social, generando progreso y bienestar para
+                nuestros clientes.
+            </p>
+            <p class="about__text">
+                Contamos con un equipo multidisciplinario que entrega soluciones innovadoras aplicando experiencia y
+                calidad en cada proyecto. Ofrecemos servicios integrales en Metal Mecánica, Montaje y Mantenimiento
+                Industrial, Evaluación de Proyectos, Ingeniería Eléctrica, Energías Renovables y Control Automático.
+            </p>
+        </div>
+        <div id="image-grid" class="about__image"></div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="servicios" class="slider__container">
+        <h2 class="title__services">Servicios</h2>
+
+        <!-- Swiper principal -->
+        <div class="swiper slide__content mySwiper">
+
+            <!-- Contenedor de tarjetas -->
+            <div class="swiper-wrapper">
+                {% for service in services %}
+                <div class="swiper-slide card">
+                    <div class="image__box">
+                        <img src="{{ service.imagen.url }}" alt="Imagen de {{ service.title }}">
+                    </div>
+                    <div class="profile__details">
+                        <div class="name__job">
+                            <h3 class="name__title">{{ service.title }}</h3>
+                            <p class="name__description">{{ service.description }}</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'core:service_detail' service.id %}" class="card__button">Leer Más</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </section>
+
+
+
+    <section class="layout">
+        <div class="layout__main">
+            <section class="main__container">
+                <h1 class="title__services">Nuestros Trabajos</h1>
+                <ul class="main__socials">
+                    <!-- Clientes -->
+                    <li class="socials__item">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <span class="socials__number" data-target="20">0</span>
+                        <p class="socials__title">Clientes</p>
+                    </li>
+                    <!-- Proyectos -->
+                    <li class="socials__item">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span class="socials__number" data-target="30">0</span>
+                        <p class="socials__title">Proyectos</p>
+                    </li>
+                    <!-- Años de experiencia -->
+                    <li class="socials__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <span class="socials__number" data-target="8">0</span>
+                        <p class="socials__title">Años de Experiencia</p>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </section>
+
+
+
+    
+    <section id="contacto" class="contact__layout">
+        <div class="contact__nav-container">
+            <!-- Columna 1: Barra de navegación -->
+            <nav class="contact__nav">
+                <div class="contact__logo">
+                    <a href="{% url 'core:home' %}" class="contact__logo-link">
+                        <img class="contact__logo-img" src="{% static 'img/FullLogo.webp' %}" alt="Logo">
+                    </a>
+                </div>
+                <div class="contact__links">
+                    <ul class="contact__menu" id="menuList">
+                        <li class="contact__menu-item"><a class="contact__menu-link"
+                                href="{% url 'core:home' %}#inicio">Inicio</a></li>
+                        <li class="contact__menu-item"><a class="contact__menu-link"
+                                href="{% url 'core:home' %}#nosotros">Nosotros</a></li>
+                        <li class="contact__menu-item"><a class="contact__menu-link"
+                                href="{% url 'core:home' %}#servicios">Servicios</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Columna 2: Información de contacto -->
+            <div class="contact__info-container">
+                <div class="contact__info">
+                    <h2 class="title__services">Contacto</h2>
+                    <ul class="contact__list">
+                        <li><strong>Email:</strong> <a href="mailto:contacto@Ingditai.cl">contacto@Ingditai.cl</a></li>
+                        <li><strong>Teléfono:</strong>+56 9 32654361 </li>
+                        <li><strong>Ubicación:</strong> Santiago, Chile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Año: lo colocamos justo abajo de ambos bloques -->
+        <p class="layout__year">Ingeniería DITAI <span>&copy;</span> <span id="current-year"></span></p>
+    </section>
+
+
+</main>
+
+{% endblock %}

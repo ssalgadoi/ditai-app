@@ -1,0 +1,879 @@
+/* ========================================
+    Variables globales
+   ======================================== */
+:root {
+    --bg-app: url('../img/fondo-app.webp');
+}
+
+/* ========================================
+    Reset básico
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: #fff;
+}
+
+/* ========================================
+    Fondo principal
+   ======================================== */
+body {
+    background-image: var(--bg-app);
+    background-size: cover;
+    /* que cubra toda la pantalla */
+    background-position: center;
+    /* centrado */
+    background-repeat: no-repeat;
+    /* no se repite */
+    background-attachment: fixed;
+    /* fijo en desktop */
+    transition: background-image 0.3s ease-in-out;
+}
+
+/* Fondo de la navbar: transparente para heredar el fondo de la web */
+.navbar-custom {
+    background: transparent;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 9px solid rgba(245, 101, 5);
+    border-bottom: 3px solid rgba(245, 101, 5);
+    /* línea sutil debajo de la navbar */
+}
+
+.navbar-custom .navbar-nav {
+    gap: 3rem;
+    /* espacio entre los links */
+    display: flex;
+    /* fuerza que los links estén en una fila */
+    flex-wrap: nowrap;
+    /* evita que se vayan a otra línea */
+    align-items: center;
+    /* centra verticalmente los links */
+}
+
+/* Separadores entre links */
+.navbar-custom .nav-item {
+    position: relative;
+}
+
+/* Separadores entre links usando pseudo-elementos */
+.navbar-custom .nav-item:not(:last-child) {
+    position: relative;
+}
+
+/* Separadores entre links usando pseudo-elementos */
+.navbar-custom .nav-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -1.5rem;
+    /* ajusta para separar del texto */
+    top: 0;
+    /* ajusta para centrar vertical */
+    height: 100%;
+    /* altura de la línea */
+    border-right: 2px solid rgb(255, 255, 255);
+    /* color del separador */
+}
+
+/* Enlaces normales */
+.navbar-custom .nav-link {
+    padding: 0 4rem;
+    color: #f5f0f0 !important;
+    /* blanco */
+    font-weight: 500;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+/* Enlaces al pasar el mouse */
+.navbar-custom .nav-link:hover {
+    border-bottom: 2px solid rgba(245, 101, 5);
+}
+
+/* Enlace activo (opcional) */
+.navbar-custom .nav-link.active {
+    color: rgb(2, 128, 212) !important;
+    /* rojo */
+}
+
+/* Botón hamburguesa */
+.navbar-custom .navbar-toggler {
+    border-color: rgba(245, 101, 5);
+    /* borde blanco */
+}
+
+/* Icono hamburguesa en blanco */
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/*=========================Carousel General=========================*/
+.carousel-inner .carousel-item img {
+    width: 100%;
+    height: 100vh;
+    /* Ocupa toda la altura de la pantalla */
+    object-fit: cover;
+    /* Ajusta imagen sin deformarla */
+    object-position: center top;
+    /* Mantiene la parte importante visible */
+    opacity: 0.9;
+}
+
+/* =========================
+    Contenedor de imagen
+========================= */
+.carousel-img-container {
+    position: relative;
+}
+
+/* =========================
+    Overlay degradado
+========================= */
+carousel-img-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Degradado de transparente a negro */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* =========================
+    Texto y enlaces del carrusel
+========================= */
+.carousel-caption {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+
+.carousel__link {
+    text-decoration: none;
+    color: rgb(255, 254, 254);
+    display: inline-block;
+}
+
+.carousel__link:hover h3 {
+    color: rgb(131, 131, 131);
+    text-decoration: underline;
+}
+
+/* =========================
+    Barra de título
+========================= */
+.black-bar {
+    background-color: rgb(0, 0, 0);
+    /* color corporativo */
+    color: rgb(255, 255, 255);
+    padding: 10px 80px;
+    text-align: center;
+    position: absolute;
+    bottom: 220px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+.black-bar h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* =========================
+    Botones de navegación
+========================= */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent !important;
+    border: none;
+    color: white;
+    font-size: 30px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: transparent !important;
+    filter: invert(1) !important;
+    /* flechas blancas */
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: none !important;
+}
+
+.layout {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2rem;
+    padding: 8rem;
+}
+
+.layout__main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__container {
+    width: 70%;
+}
+
+.main__title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: #fbf9fc;
+}
+
+.main__socials {
+    width: 100%;
+    background-color: rgba(245, 101, 5, 0.7);
+    border-radius: 10px;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.socials__item {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.socials__item i {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.socials__number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.socials__title {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: center;
+
+}
+
+#image-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 100%;
+    /* antes 600px */
+    height: 100%;
+    /* antes 300px */
+    overflow: hidden;
+    opacity: 0.7;
+}
+
+
+.grid-piece {
+    background-image: url('../img/nosotros.webp');
+    background-size: 800% 400%;
+    /* columnas x filas */
+    opacity: 0;
+    transition: opacity 0.5s;
+
+}
+
+.about {
+    position: relative;
+    padding: 1rem 1rem;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+}
+
+.about__title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #f56505;
+    margin-bottom: 2rem;
+}
+
+.about__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.about__content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.6);
+    /* overlay oscuro para legibilidad */
+    padding: 3rem;
+    border-radius: 1rem;
+}
+
+.about__subtitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f56505;
+    margin-bottom: 1.5rem;
+}
+
+.about__text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 2.6rem;
+    color: #eee;
+}
+
+/* Contenedor general del slider */
+.slider__container {
+
+    padding: 90px 5%;
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+    /* Oculta cualquier contenido que sobresalga horizontalmente */
+}
+
+.title__services {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: rgb(255, 254, 254);
+    /* Color institucional */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 7rem;
+    position: relative;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.title__services::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: rgb(255, 123, 0);
+    /* Color institucional */
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+
+
+/* Contenedor del contenido deslizante */
+.slide__content {
+    margin-bottom: 4rem;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Previene que el contenido se desborde */
+}
+
+/* Contenedor de las tarjetas adaptado a Swiper */
+.swiper-wrapper {
+    display: flex;
+}
+
+/* Tarjeta individual */
+.swiper-slide {
+    flex: 0 0 auto;
+    width: 90%;
+    max-width: 300px;
+    min-width: 300px;
+    border-radius: 8px;
+    background: white;
+    overflow: hidden;
+    margin: 0 auto;
+    scroll-snap-align: start;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Contenedor de las tarjetas, scroll horizontal con snapping */
+.card__wrapper {
+    display: flex;
+    overflow-x: auto;
+    /* Permite desplazamiento horizontal */
+    scroll-snap-type: x mandatory;
+    /* Obliga al snap a la tarjeta m谩s cercana */
+    -webkit-overflow-scrolling: touch;
+    /* Mejora scroll en iOS */
+    gap: 20px;
+    /* Espacio entre tarjetas */
+    padding-bottom: 10px;
+    scroll-padding: 20px;
+    /* Espacio antes del primer snap */
+}
+
+/* Tarjeta individual */
+.card {
+    flex: 0 0 auto;
+    /* 馃敟 Deja que el ancho sea autom谩tico */
+    width: 300px;
+    height: 500px;
+
+    border-radius: 8px;
+    background: white;
+    overflow: hidden;
+    scroll-snap-align: start;
+    margin: 0 auto;
+}
+
+
+/* Contenedor de la imagen de la tarjeta */
+.image__box {
+    height: 200px;
+    width: 100%;
+}
+
+/* Imagen dentro de la tarjeta */
+.image__box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+    /* Bordes redondeados solo arriba */
+    object-fit: cover;
+    /* Recorta la imagen sin deformarla */
+}
+
+/* Contenido textual de la tarjeta */
+.profile__details {
+    padding: 25px;
+    margin-bottom: 25px;
+    font-size: 15px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.name__title {
+
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.name__description {
+    font-size: 14px;
+    color: #4d4d4d;
+    /* Gris suave para descripci贸n */
+}
+
+/* Bot贸n dentro de la tarjeta */
+.card__button {
+    margin-top: auto;
+    /* Empuja el bot贸n al final de la tarjeta */
+    padding: 5px 15px;
+    background-color: rgb(255, 123, 0);
+    color: #e9e9e9;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover del bot贸n */
+.card__button:hover {
+    background-color: rgb(255, 123, 0);
+    transform: scale(1.05);
+    /* Efecto visual al pasar el mouse */
+    color: black;
+}
+
+/* Botones de navegaci贸n Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #ffffff;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    color: rgb(255, 123, 0);
+}
+
+/* Servicios */
+.services__container {
+    margin: 0 auto 4rem auto;
+    padding: 0 50px;
+    text-align: justify;
+}
+
+.services__container p {
+    line-height: 1.6;
+    font-size: 23px;
+    color: #ffffff;
+    margin-bottom: 10rem;
+}
+
+.services__subtitle {
+    font-size: 1.9em;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+#fullImageView {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    z-index: 9999;
+    overflow: auto;
+}
+
+#fullImage {
+    padding: 24px;
+    max-width: 98%;
+    max-height: 98%;
+}
+
+.services__galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 2rem;
+}
+
+.services__galeria img {
+    max-width: 298px;
+    max-height: 224px;
+    margin: 2px;
+}
+
+.services__galeria img:hover {
+    cursor: pointer;
+    filter: brightness(70%);
+}
+
+
+
+#closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+
+
+/* Contacto */
+.contact__layout {
+    color: #fff;
+    padding: 10px 20px;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding-bottom: 40px;
+    margin-top: 10px;
+}
+
+.layout__year {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 0;
+    /* o ajusta según necesites */
+}
+
+
+.contact__nav-container {
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.contact__nav {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.contact__logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.contact__logo-link {
+    display: flex;
+    justify-content: center;
+}
+
+.contact__logo-img {
+    max-width: 500px;
+    height: auto;
+}
+
+.contact__links {
+    width: 100%;
+    text-align: center;
+}
+
+.contact__menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.contact__menu-item {
+    margin: 0;
+}
+
+.contact__menu-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', sans-serif;
+    transition: color 0.3s;
+}
+
+.contact__menu-link:hover {
+    color: rgb(255, 123, 0);
+}
+
+.contact__info-container {
+    width: 50%;
+    padding: 30px;
+    color: #fff;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    max-width: 500px;
+    height: auto;
+}
+
+
+.contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact__list li {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.contact__list a {
+    color: rgb(255, 123, 0);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact__list a:hover {
+    color: rgb(255, 123, 0);
+    text-decoration: underline;
+}
+
+
+@media (min-width: 1200px) {
+    .card {
+        width: 500px;
+        /* Ancho m谩s grande en pantallas grandes */
+        height: 600px;
+        /* Alto m谩s grande en pantallas grandes */
+    }
+}
+
+
+
+
+
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    /* se muestra con JS */
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 991.98px) {
+    .navbar-custom {
+        padding: 1rem 1rem;
+        /* menos padding en móvil */
+    }
+
+    /* Quitar separadores */
+    .navbar-custom .nav-item:not(:last-child)::after {
+        display: none;
+    }
+
+    /* Navbar-nav: columna, centrado y con línea superior */
+    .navbar-custom .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        /* centra los links horizontalmente */
+        gap: 1rem;
+        width: 100%;
+        /* ocupa todo el ancho */
+        border-top: 3px solid rgba(245, 101, 5);
+        margin-top: 1rem;
+        /* separa la línea del contenido superior */
+        padding-top: 1rem;
+        /* opcional: agrega espacio extra dentro */
+    }
+
+    /* Links: ocupar todo el ancho y centrados */
+    .navbar-custom .nav-link {
+        text-align: center;
+        /* centra el texto */
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .navbar-custom .nav-link:hover {
+        border-bottom: 2px solid rgba(245, 101, 5);
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+
+    .carousel-inner .carousel-item img {
+        height: 70vh;
+        /* menos altura en tablets y móviles */
+    }
+
+    .black-bar {
+        padding: 8px 40px;
+        bottom: 150px;
+    }
+
+    .black-bar h2 {
+        font-size: 14px;
+    }
+
+    .black-bar h3 {
+        font-size: 17px;
+    }
+
+    .black-bar p {
+        display: none;
+    }
+
+    .layout {
+        padding: 3rem;
+    }
+
+    .main__container {
+        width: 90%;
+    }
+
+    .main__title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .main__socials {
+        flex-direction: column;
+        padding: 2rem 1rem;
+    }
+
+    .socials__item {
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .socials__item i {
+        font-size: 3rem;
+    }
+
+    .socials__number {
+        font-size: 1.5rem;
+    }
+
+    .socials__title {
+        font-size: 1.4rem;
+    }
+
+    .contact__nav-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .contact__nav,
+    .contact__info-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .contact__menu {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .contact__menu-link {
+        font-size: 18px;
+    }
+
+    .contact__info-container {
+        margin-top: 20px;
+    }
+    .contact__logo-img {
+    max-width: 200px;
+    height: auto;
+}
+}

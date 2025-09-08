@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Servicios
+{% endblock %}
+
+{% block content %}
+<main class="container">
+    <h2 class="title__services">Servicios</h2>
+    <div class="services__container">
+        <p>
+            {{ service.content|linebreaks }}
+        </p>
+        <h2 class="title__services">{{ service.title }}</h2>
+    </div>
+    <div class="services__galeria">
+        {% for image in service.imagenes.all %}
+        <img src="{{ image.image.url }}" alt="{{ service.title }}" class="gallery-image"
+            data-index="{{ forloop.counter0 }}" onclick="fullView(this)">
+        {% endfor %}
+    </div>
+
+
+    <!-- Vista ampliada -->
+    <div id="fullImageView"
+        style="display: none; position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <button onclick="closeFullView()"
+            style="position: absolute; top: 20px; right: 20px; font-size: 2rem; color: white; background: none; border: none;">&times;</button>
+        <button onclick="prevImage()"
+            style="position: absolute; left: 30px; font-size: 2rem; color: white; background: none; border: none;">&#10094;</button>
+        <img id="fullImage" src="" alt="Imagen ampliada" style="max-width: 90%; max-height: 90%;">
+        <button onclick="nextImage()"
+            style="position: absolute; right: 30px; font-size: 2rem; color: white; background: none; border: none;">&#10095;</button>
+    </div>
+</main>
+{% endblock %}
