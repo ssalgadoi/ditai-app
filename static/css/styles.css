@@ -59,6 +59,13 @@ body {
     /* centra verticalmente los links */
 }
 
+.logo {
+    height: auto;
+    width: 150px; 
+    max-width: 100%;  
+
+}
+
 /* Separadores entre links */
 .navbar-custom .nav-item {
     position: relative;
@@ -812,6 +819,35 @@ carousel-img-container::after {
 
     .black-bar p {
         display: none;
+    }
+    .about {
+        padding: 2rem 1rem;
+    }
+
+    .about__title {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about__subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .about__text {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    .about__content {
+        padding: 2rem;
+        border-radius: 0.8rem;
+    }
+
+    .about__image {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
     }
 
     .layout {

@@ -32,10 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-
+    
+    
     // =========================
     // Contador animado con duración fija
     // =========================
+    
+    
     const counters = document.querySelectorAll(".socials__number");
     const duration = 500; // duración total en ms
 
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         requestAnimationFrame(updateCount);
     };
-
+    // Usamos Intersection Observer para detectar visibilidad
     const observerOptions = { root: null, threshold: 0.5, rootMargin: "0px 0px -50px 0px" };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -67,6 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
         counter.innerText = "";
         observer.observe(counter);
     });
+
+    
 
     // =========================
     // Grid de imágenes (en Nosotros)
@@ -113,6 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         aboutObserver.observe(aboutSection);
     }
+    
+    
 
 
 
@@ -130,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
         });
     }
+
 
     // =========================
     // Galería de imágenes con vista ampliada
@@ -163,6 +171,21 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target === fullViewContainer) closeFullView();
         });
     }
+
+    // =========================
+    // Scroll to Section based on data attribute
+    // =========================        
+    const section = document.body.getAttribute("data-section");
+    if (section) {
+        const element = document.getElementById(section);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+
+
+
 
 });
 
