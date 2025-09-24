@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ['localhost',
                  '.www.ditai.cl']
 
 
+MAINTENANCE_MODE = False
 
 # Application definition
 
@@ -36,7 +37,9 @@ INSTALLED_APPS = [
     'core',
 ]
 
+
 MIDDLEWARE = [
+    "core.middleware.MantenimientoMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -1,13 +1,18 @@
 /* ========================================
-    Variables globales
-   ======================================== */
+    VARIABLES GLOBALES
+======================================== */
 :root {
     --bg-app: url('../img/fondo-app.webp');
+    --color-principal: rgb(245, 101, 5);
+    --color-blanco: #fff;
+    --color-negro: #000;
+    --color-hover: rgb(131, 131, 131);
+    --font-base: system-ui, sans-serif;
 }
 
 /* ========================================
-    Reset básico
-   ======================================== */
+    RESET Y BASE
+======================================== */
 * {
     margin: 0;
     padding: 0;
@@ -16,25 +21,18 @@
 
 html,
 body {
-    height: 100%;
-    font-family: system-ui, sans-serif;
+    min-height: 100%;
+    font-family: var(--font-base);
     line-height: 1.6;
-    color: #fff;
+    color: var(--color-blanco);
 }
 
-/* ========================================
-    Fondo principal
-   ======================================== */
 body {
     background-image: var(--bg-app);
     background-size: cover;
-    /* que cubra toda la pantalla */
     background-position: center;
-    /* centrado */
     background-repeat: no-repeat;
-    /* no se repite */
     background-attachment: fixed;
-    /* fijo en desktop */
     transition: background-image 0.3s ease-in-out;
 }
 
@@ -43,27 +41,23 @@ body {
     background: transparent;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-top: 9px solid rgba(245, 101, 5);
-    border-bottom: 3px solid rgba(245, 101, 5);
-    /* línea sutil debajo de la navbar */
+    border-top: 9px solid var(--color-principal);
+    border-bottom: 3px solid var(--color-principal);
 }
+
 
 .navbar-custom .navbar-nav {
-    gap: 3rem;
-    /* espacio entre los links */
     display: flex;
-    /* fuerza que los links estén en una fila */
     flex-wrap: nowrap;
-    /* evita que se vayan a otra línea */
+    gap: 3rem;
     align-items: center;
-    /* centra verticalmente los links */
 }
 
+/* Logo */
 .logo {
+    width: 170px;
+    max-width: 100%;
     height: auto;
-    width: 150px; 
-    max-width: 100%;  
-
 }
 
 /* Separadores entre links */
@@ -81,20 +75,15 @@ body {
     content: "";
     position: absolute;
     right: -1.5rem;
-    /* ajusta para separar del texto */
     top: 0;
-    /* ajusta para centrar vertical */
     height: 100%;
-    /* altura de la línea */
-    border-right: 2px solid rgb(255, 255, 255);
-    /* color del separador */
+    border-right: 2px solid var(--color-blanco);
 }
 
 /* Enlaces normales */
 .navbar-custom .nav-link {
     padding: 0 4rem;
-    color: #f5f0f0 !important;
-    /* blanco */
+    color: var(--color-blanco);
     font-weight: 500;
     font-size: 1.3rem;
     transition: color 0.3s ease;
@@ -103,19 +92,14 @@ body {
 
 /* Enlaces al pasar el mouse */
 .navbar-custom .nav-link:hover {
-    border-bottom: 2px solid rgba(245, 101, 5);
+    border-bottom: 2px solid var(--color-principal);
 }
 
-/* Enlace activo (opcional) */
-.navbar-custom .nav-link.active {
-    color: rgb(2, 128, 212) !important;
-    /* rojo */
-}
 
 /* Botón hamburguesa */
 .navbar-custom .navbar-toggler {
-    border-color: rgba(245, 101, 5);
-    /* borde blanco */
+    border-color: var(--color-principal);
+
 }
 
 /* Icono hamburguesa en blanco */
@@ -127,40 +111,30 @@ body {
 .carousel-inner .carousel-item img {
     width: 100%;
     height: 100vh;
-    /* Ocupa toda la altura de la pantalla */
     object-fit: cover;
-    /* Ajusta imagen sin deformarla */
     object-position: center top;
-    /* Mantiene la parte importante visible */
     opacity: 0.9;
 }
 
-/* =========================
-    Contenedor de imagen
-========================= */
+
 .carousel-img-container {
     position: relative;
 }
 
-/* =========================
-    Overlay degradado
-========================= */
-carousel-img-container::after {
+
+.carousel-img-container::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Degradado de transparente a negro */
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
     pointer-events: none;
     z-index: 5;
 }
 
-/* =========================
-    Texto y enlaces del carrusel
-========================= */
+
 .carousel-caption {
     position: relative;
     text-align: center;
@@ -169,22 +143,18 @@ carousel-img-container::after {
 
 .carousel__link {
     text-decoration: none;
-    color: rgb(255, 254, 254);
+    color: var(--color-blanco);
     display: inline-block;
 }
 
 .carousel__link:hover h3 {
-    color: rgb(131, 131, 131);
+    color: var(--color-hover);
     text-decoration: underline;
 }
 
-/* =========================
-    Barra de título
-========================= */
 .black-bar {
-    background-color: rgb(0, 0, 0);
-    /* color corporativo */
-    color: rgb(255, 255, 255);
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
     padding: 10px 80px;
     text-align: center;
     position: absolute;
@@ -201,119 +171,86 @@ carousel-img-container::after {
 }
 
 /* =========================
-    Botones de navegación
+   Botones de navegación del carrusel
 ========================= */
 .carousel-control-prev,
 .carousel-control-next {
-    background-color: transparent !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-principal, rgba(255, 255, 255, 0.2));
+    /* usa variable o fallback */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
     border: none;
-    color: white;
-    font-size: 30px;
 }
 
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: var(--color-principal, rgba(255, 255, 255, 0.4));
+    transform: scale(1.1);
+}
+
+/* Elimina los SVG por defecto */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: transparent !important;
-    filter: invert(1) !important;
-    /* flechas blancas */
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: none !important;
+    display: none;
 }
 
-.layout {
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 2rem;
-    padding: 8rem;
+/* Íconos de Font Awesome */
+.carousel-control-prev i,
+.carousel-control-next i {
+    font-size: 1.8rem;
+    color: var(--color-negro);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    /* para que no se pierdan en fondos claros */
 }
 
-.layout__main {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* Posición */
+.carousel-control-prev {
+    left: 20px;
 }
 
-.main__container {
-    width: 70%;
+.carousel-control-next {
+    right: 20px;
 }
 
-.main__title {
-    text-align: center;
-    margin-bottom: 4rem;
-    font-weight: 800;
-    font-size: 3.5rem;
-    color: #fbf9fc;
-}
 
-.main__socials {
-    width: 100%;
-    background-color: rgba(245, 101, 5, 0.7);
-    border-radius: 10px;
-    padding: 4rem 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    list-style: none;
-}
 
-.socials__item {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-}
-
-.socials__item i {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.socials__number {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.socials__title {
-    display: block;
-    font-size: 1.9rem;
-    font-weight: 700;
-    text-align: center;
-
-}
-
+/* ========================================
+    GRID DE IMÁGENES
+======================================== */
 #image-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4, 1fr);
     width: 100%;
-    /* antes 600px */
     height: 100%;
-    /* antes 300px */
     overflow: hidden;
     opacity: 0.7;
 }
 
-
 .grid-piece {
     background-image: url('../img/nosotros.webp');
     background-size: 800% 400%;
-    /* columnas x filas */
     opacity: 0;
     transition: opacity 0.5s;
-
 }
 
+/* ========================================
+    ABOUT
+======================================== */
 .about {
     position: relative;
-    padding: 1rem 1rem;
-    color: #fff;
+    padding: 1rem;
+    color: var(--color-blanco);
     text-align: center;
     overflow: hidden;
     margin: 0;
@@ -322,9 +259,11 @@ carousel-img-container::after {
 .about__title {
     font-size: 3rem;
     font-weight: 800;
-    color: #f56505;
+    color: var(--color-principal);
     margin-bottom: 2rem;
 }
+
+
 
 .about__image {
     position: absolute;
@@ -366,12 +305,10 @@ carousel-img-container::after {
 
 /* Contenedor general del slider */
 .slider__container {
-
-    padding: 90px 5%;
+    padding: 10px 2%;
     width: 100%;
-    padding: 20px;
     overflow: hidden;
-    /* Oculta cualquier contenido que sobresalga horizontalmente */
+
 }
 
 .title__services {
@@ -408,7 +345,7 @@ carousel-img-container::after {
     position: relative;
     width: 100%;
     overflow: hidden;
-    /* Previene que el contenido se desborde */
+
 }
 
 /* Contenedor de las tarjetas adaptado a Swiper */
@@ -430,7 +367,8 @@ carousel-img-container::after {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 /* Contenedor de las tarjetas, scroll horizontal con snapping */
@@ -450,17 +388,21 @@ carousel-img-container::after {
 }
 
 /* Tarjeta individual */
+
 .card {
     flex: 0 0 auto;
-    /* 馃敟 Deja que el ancho sea autom谩tico */
     width: 300px;
-    height: 500px;
-
     border-radius: 8px;
-    background: white;
     overflow: hidden;
-    scroll-snap-align: start;
-    margin: 0 auto;
+    background-color: var(--color-blanco);
+
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+    /* que se ajuste al contenido */
+    min-height: 0;
+    /* elimina espacio extra */
 }
 
 
@@ -475,38 +417,44 @@ carousel-img-container::after {
     width: 100%;
     height: 100%;
     border-radius: 8px 8px 0 0;
-    /* Bordes redondeados solo arriba */
     object-fit: cover;
-    /* Recorta la imagen sin deformarla */
 }
 
 /* Contenido textual de la tarjeta */
 .profile__details {
-    padding: 25px;
-    margin-bottom: 25px;
+    padding: 10px;
+    margin-bottom: 10px;
     font-size: 15px;
-    /* display: flex;
-    flex-direction: column; */
+
 }
 
 .name__title {
-
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .name__description {
     font-size: 14px;
     color: #4d4d4d;
-    /* Gris suave para descripci贸n */
+    max-height: 100px;
+    /* límite */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    /* máximo 4 líneas */
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    /* estándar futuro */
+    box-orient: vertical;
 }
 
 /* Bot贸n dentro de la tarjeta */
 .card__button {
-    margin-top: auto;
+    margin-top: 10px;
     /* Empuja el bot贸n al final de la tarjeta */
-    padding: 5px 15px;
+    padding: 15px;
     background-color: rgb(255, 123, 0);
     color: #e9e9e9;
     font-size: 16px;
@@ -514,26 +462,18 @@ carousel-img-container::after {
     text-decoration: none;
     border-radius: 2px;
     transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
 }
 
 /* Hover del bot贸n */
 .card__button:hover {
-    background-color: rgb(255, 123, 0);
+    background-color: var(--color-principal);
     transform: scale(1.05);
-    /* Efecto visual al pasar el mouse */
-    color: black;
+    color: var(--color-negro);
 }
 
-/* Botones de navegaci贸n Swiper */
-.swiper-button-prev,
-.swiper-button-next {
-    color: #ffffff;
-}
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-    color: rgb(255, 123, 0);
-}
+
 
 /* Servicios */
 .services__container {
@@ -609,40 +549,144 @@ carousel-img-container::after {
 }
 
 
-
-/* Contacto */
-.contact__layout {
-    color: #fff;
-    padding: 10px 20px;
-    font-family: 'Helvetica Neue', sans-serif;
-    padding-bottom: 40px;
-    margin-top: 10px;
+/* ========================================
+    LAYOUT GENERAL
+======================================== */
+.layout {
+    height: 100%;
+    border-radius: 2rem;
+    padding: 1rem;
 }
 
-.layout__year {
-    color: #ffffff;
+.layout__main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__container {
+    width: 90%;
+}
+
+/* .main__title {
     text-align: center;
-    font-size: 1.1em;
-    margin-top: 5px;
-    margin-bottom: 0;
-    /* o ajusta según necesites */
+    margin-bottom: 1rem;
+    font-weight: 800;
+    font-size: 3rem;
+    color: var(--color-blanco);
+} */
+
+/* ========================================
+    SOCIALS
+======================================== */
+.main__socials {
+    width: 100%;
+    background-color: rgba(245, 101, 5, 0.7);
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.socials__item {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-negro);
+    margin: 1rem 1rem;
+}
+
+.socials__item i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.socials__number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.socials__title {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+
+}
+
+
+/* Contacto */
+/* .contact__layout {
+    padding: 20px 20px;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding-bottom: 10px;
+    margin-top: 1px;
+} */
+
+.layout__year {
+    color: var(--color-blanco);
+    text-align: center;
+    font-size: 1.3em;
+
+}
+.contact__services {
+    font-size: clamp(3rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: rgb(255, 254, 254);
+    /* Color institucional */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 3rem;
+    position: relative;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.contact__services::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: rgb(255, 123, 0);
+    /* Color institucional */
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
 }
 
 
 .contact__nav-container {
     display: flex;
-    height: 100vh;
+    flex-direction: row;
+    /* aseguramos fila */
     justify-content: space-between;
+    align-items: flex-start;
+    /* para que el contenido no se estire verticalmente */
     gap: 20px;
+    flex-wrap: wrap;
+    /* responsive */
+    min-height: auto;
+    /* no ocupar toda la pantalla */
+    margin-top: 2rem;
 }
 
+
+
+
 .contact__nav {
-    width: 50%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 100px;
 }
 
 .contact__logo {
@@ -657,13 +701,14 @@ carousel-img-container::after {
 }
 
 .contact__logo-img {
-    max-width: 500px;
+    max-width: 250px;
     height: auto;
 }
 
 .contact__links {
     width: 100%;
     text-align: center;
+   
 }
 
 .contact__menu {
@@ -680,15 +725,16 @@ carousel-img-container::after {
 }
 
 .contact__menu-link {
-    color: #fff;
+    color: var(--color-blanco);
     text-decoration: none;
     font-weight: bold;
     font-family: 'Helvetica Neue', sans-serif;
     transition: color 0.3s;
+    font-size: 1.2rem;
 }
 
 .contact__menu-link:hover {
-    color: rgb(255, 123, 0);
+    color: var(--color-principal);
 }
 
 .contact__info-container {
@@ -714,7 +760,7 @@ carousel-img-container::after {
 }
 
 .contact__list li {
-    margin: 15px 0;
+    margin: 5px 0;
     font-size: 18px;
 }
 
@@ -730,30 +776,44 @@ carousel-img-container::after {
 }
 
 
-@media (min-width: 1200px) {
-    .card {
-        width: 500px;
-        /* Ancho m谩s grande en pantallas grandes */
-        height: 600px;
-        /* Alto m谩s grande en pantallas grandes */
-    }
-}
-
-
-
-
-
 #scrollToTopBtn {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    display: none;
-    /* se muestra con JS */
-    padding: 10px 15px;
-    font-size: 18px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-principal);
+    color: var(--color-negro);
+    font-size: 22px;
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.4s ease, transform 0.3s ease;
+
+    opacity: 0;
+    /* oculto al inicio */
+    pointer-events: none;
+    /* desactiva clic cuando está oculto */
 }
+
+#scrollToTopBtn.show {
+    opacity: 1;
+    /* aparece suavemente */
+    pointer-events: auto;
+    /* vuelve a ser clickeable */
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--color-principal);
+    transform: scale(1.1);
+}
+
+
 
 /* Estilos responsivos para pantallas pequeñas */
 @media (max-width: 991.98px) {
@@ -820,6 +880,7 @@ carousel-img-container::after {
     .black-bar p {
         display: none;
     }
+
     .about {
         padding: 2rem 1rem;
     }
@@ -908,8 +969,90 @@ carousel-img-container::after {
     .contact__info-container {
         margin-top: 20px;
     }
+
     .contact__logo-img {
-    max-width: 200px;
-    height: auto;
+        max-width: 200px;
+        height: auto;
+    }
 }
+
+/* ========================================
+   MONITORES GRANDES (21" o más, >= 1600px)
+======================================== */
+@media screen and (min-width: 1600px) {
+
+    body {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    main,
+    .layout,
+    .main__container,
+    .about__content,
+    .services__container {
+        max-width: 1600px;
+        /* mantiene centrado */
+        margin: 0 auto;
+    }
+
+    /* Fuerza que el carrusel ocupe todo el ancho */
+    .hero,
+    #carouselExampleIndicators,
+    .carousel-inner,
+    .carousel-item,
+    .carousel-img-container {
+        width: 100vw;
+        max-width: 100%;
+    }
+
+    /* Imagen: ocupa todo el ancho sin deformarse */
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        /* altura automática según proporción */
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .navbar-custom .nav-link {
+        font-size: 1.5rem;
+        padding: 0 5rem;
+    }
+
+    .about__title {
+        font-size: 4rem;
+    }
+
+    .about__subtitle {
+        font-size: 2.5rem;
+    }
+
+    .about__text {
+        font-size: 1.5rem;
+        max-width: 1200px;
+        /* evita que la línea sea infinita */
+        margin: 0 auto;
+    }
+
+    .services__container,
+    .contact__nav-container {
+        background-color: rgba(0, 0, 0, 0.6); /* negro semi-transparente */
+        padding: 3rem 5%;
+        border-radius: 1rem;
+        margin: 0 auto 4rem auto;
+        backdrop-filter: blur(5px);
+    }
+
+    .services__container p {
+        font-size: 1.4rem;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact__layout {
+        padding: 120px 100px 80px 100px;
+        font-size: 1.2rem;
+    }
 }

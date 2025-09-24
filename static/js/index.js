@@ -25,22 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================
     const scrollBtn = document.getElementById("scrollToTopBtn");
     if (scrollBtn) {
-        window.addEventListener("scroll", () => {
-            scrollBtn.style.display = window.scrollY > 20 ? "block" : "none";
-        });
+        const homeUrl = scrollBtn.dataset.homeUrl;
+
+        const toggleScrollBtn = () => {
+            if (window.scrollY > 500) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        };
+
+        toggleScrollBtn();
+        window.addEventListener("scroll", toggleScrollBtn);
+
         scrollBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
+            window.history.pushState(null, "", homeUrl);
         });
     }
-    
-    
+
     // =========================
     // Contador animado con duración fija
     // =========================
-    
-    
     const counters = document.querySelectorAll(".socials__number");
-    const duration = 500; // duración total en ms
+    const duration = 500;
 
     const animateCounter = (counter) => {
         const target = parseInt(counter.getAttribute("data-target"));
@@ -57,24 +65,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         requestAnimationFrame(updateCount);
     };
-    // Usamos Intersection Observer para detectar visibilidad
-    const observerOptions = { root: null, threshold: 0.5, rootMargin: "0px 0px -50px 0px" };
-    const observer = new IntersectionObserver((entries) => {
+
+    const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) animateCounter(entry.target);
             else entry.target.innerText = "";
         });
-    }, observerOptions);
+    }, { root: null, threshold: 0.5, rootMargin: "0px 0px -50px 0px" });
 
     counters.forEach(counter => {
         counter.innerText = "";
-        observer.observe(counter);
+        counterObserver.observe(counter);
     });
 
-    
-
     // =========================
-    // Grid de imágenes (en Nosotros)
+    // Grid de imágenes (Nosotros)
     // =========================
     const aboutSection = document.querySelector("#about");
     const grid = document.getElementById("image-grid");
@@ -83,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const rows = 4;
         const cols = 8;
 
-        // Crear las piezas del mosaico
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
                 const div = document.createElement("div");
@@ -95,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Importante: solo las piezas dentro del grid
         const pieces = grid.querySelectorAll(".grid-piece");
 
         function showNextPiece(i = 0) {
@@ -105,12 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Usamos un observer independiente
         const aboutObserver = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
                     showNextPiece();
-                    aboutObserver.disconnect(); // ✅ se ejecuta solo una vez
+                    aboutObserver.disconnect();
                 }
             },
             { threshold: 0.3 }
@@ -118,11 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         aboutObserver.observe(aboutSection);
     }
-    
-    
-
-
-
 
     // =========================
     // Swiper
@@ -138,9 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // =========================
-    // Galería de imágenes con vista ampliada
+    // Galería de imágenes
     // =========================
     const galleryImages = document.querySelectorAll(".services__galeria img");
     const fullViewContainer = document.getElementById("fullImageView");
@@ -173,19 +169,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================
-    // Scroll to Section based on data attribute
-    // =========================        
-    const section = document.body.getAttribute("data-section");
-    if (section) {
-        const element = document.getElementById(section);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+    // Scroll inicial desde Django
+    // =========================
+    const sectionFromServer = "{{ section }}";
+    if (sectionFromServer) {
+        const target = document.getElementById(sectionFromServer);
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: "smooth" });
+            }, 100);
         }
     }
 
+    // =========================
+    // Actualizar URL al hacer scroll (corrección inicio)
+    // =========================
+    const sections = document.querySelectorAll("section[data-section]");
+    const sectionObserver = new IntersectionObserver((entries) => {
+        // Si estamos en la parte superior
+        if (window.scrollY < 460) {
+            if (window.location.pathname !== "/") {
+                window.history.replaceState(null, "", "/");
+            }
+            return;
+        }
 
+        // Detectar la sección más visible
+        let maxRatio = 0;
+        let visibleSection = null;
+        entries.forEach(entry => {
+            if (entry.intersectionRatio > maxRatio) {
+                maxRatio = entry.intersectionRatio;
+                visibleSection = entry.target;
+            }
+        });
 
+        if (visibleSection) {
+            const sec = visibleSection.dataset.section;
+            if (sec && window.location.pathname !== "/" + sec + "/") {
+                window.history.replaceState(null, "", "/" + sec + "/");
+            }
+        }
+    }, { threshold: Array.from({ length: 101 }, (_, i) => i / 100) });
 
+    sections.forEach(sec => sectionObserver.observe(sec));
+
+    // =========================
+    // Scroll suave al hacer click en links del menú
+    // =========================
+    const navLinks = document.querySelectorAll("nav a[href^='/']");
+    navLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            const urlParts = link.getAttribute("href").split("/");
+            const sectionId = urlParts[1];
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                e.preventDefault();
+                targetSection.scrollIntoView({ behavior: "smooth" });
+                window.history.pushState(null, "", "/" + sectionId + "/");
+            }
+        });
+    });
 
 });
 

@@ -35,11 +35,13 @@
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
+               <i class="fas fa-chevron-left"></i>
+                <span class="visually-hidden">Anterior</span>   
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <i class="fas fa-chevron-right"></i>
                 <span class="visually-hidden">Siguiente</span>
             </button>
         </div>
@@ -51,7 +53,7 @@
 
 
     <!-- Sección Nosotros -->
-    <section id="nosotros" class="about">
+    <section id="nosotros" class="about" data-section="nosotros">
         <!-- Contenido de texto -->
         <div id="about" class="about__content">
             <!-- Imagen mosaico animada -->
@@ -59,7 +61,7 @@
 
             <h2 class="about__subtitle">DITAI INGENIERÍA</h2>
             <p class="about__text">
-                Ubicados en Buin, Región Metropolitana, somos una empresa de profesionales senior con más de 25 años de
+                Ubicados en Buin, Región Metropolitana, somos una Empresa de Profesionales senior con más de 25 años de
                 experiencia en la Industria del Chancado, Cementera, Prefabricados, Construcción, Energía y Minería.
                 Nuestro objetivo es contribuir al desarrollo económico y social, generando progreso y bienestar para
                 nuestros clientes.
@@ -74,7 +76,7 @@
     </section>
 
     <!-- Sección Proyectos -->
-    <section id="servicios" class="slider__container">
+    <section id="servicios" class="slider__container" data-section="servicios">
         <h2 class="title__services">Servicios</h2>
 
         <!-- Swiper principal -->
@@ -107,75 +109,95 @@
 
 
 
-    <section class="layout">
+    <!-- Sección Contacto -->
+
+
+
+    
+    <section id="contacto" class="contact__layout" data-section="contacto">
+
+    <!-- =========================
+         Navbar y contacto
+    ========================= -->
+    <div class="contact__nav-container">
+
+        <!-- Barra de navegación -->
+        <nav class="contact__nav">
+            <div class="contact__logo">
+                <a href="{% url 'core:home' %}" class="contact__logo-link">
+                    <img class="contact__logo-img" src="{% static 'img/FullLogo.webp' %}" alt="Logo">
+                </a>
+            </div>
+            <div class="contact__links">
+                <ul class="contact__menu" id="menuList">
+                    <li class="contact__menu-item">
+                        <a class="contact__menu-link" href="{% url 'core:home' %}">Inicio</a>
+                    </li>
+                    <li class="contact__menu-item">
+                        <a class="contact__menu-link" href="{% url 'core:nosotros' %}">Nosotros</a>
+                    </li>
+                    <li class="contact__menu-item">
+                        <a class="contact__menu-link" href="{% url 'core:servicios' %}">Servicios</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Información de contacto -->
+        <div class="contact__info-container">
+            <div class="contact__info">
+                <h2 class="contact__services">Contacto</h2>
+                <ul class="contact__list">
+                    <li><strong>Email:</strong> <a href="mailto:contacto@ditai.cl">contacto@ditai.cl</a></li>
+                    <li><strong>Teléfono:</strong> +56 9 32654361</li>
+                    <li><strong>Ubicación:</strong> Santiago, Chile</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================
+         Sección de "Nuestros Trabajos"
+    ========================= -->
+    <div class="layout">
         <div class="layout__main">
             <section class="main__container">
-                <h1 class="title__services">Nuestros Trabajos</h1>
+                <!-- <h1 class="main__title">Nuestros Trabajos</h1> -->
                 <ul class="main__socials">
+
                     <!-- Clientes -->
                     <li class="socials__item">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <span class="socials__number" data-target="20">0</span>
                         <p class="socials__title">Clientes</p>
                     </li>
+
                     <!-- Proyectos -->
                     <li class="socials__item">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span class="socials__number" data-target="30">0</span>
                         <p class="socials__title">Proyectos</p>
                     </li>
+
                     <!-- Años de experiencia -->
                     <li class="socials__item">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <span class="socials__number" data-target="8">0</span>
+                        <span class="socials__number" data-target="28">0</span>
                         <p class="socials__title">Años de Experiencia</p>
                     </li>
+
                 </ul>
             </section>
         </div>
-    </section>
+    </div>
 
+    <!-- Año de copyright -->
+    <p class="layout__year">
+        Ingeniería DITAI <span>&copy;</span> <span id="current-year"></span>
+    </p>
 
-
-    
-    <section id="contacto" class="contact__layout">
-        <div class="contact__nav-container">
-            <!-- Columna 1: Barra de navegación -->
-            <nav class="contact__nav">
-                <div class="contact__logo">
-                    <a href="{% url 'core:home' %}" class="contact__logo-link">
-                        <img class="contact__logo-img" src="{% static 'img/FullLogo.webp' %}" alt="Logo">
-                    </a>
-                </div>
-                <div class="contact__links">
-                    <ul class="contact__menu" id="menuList">
-                        <li class="contact__menu-item"><a class="contact__menu-link"
-                                href="{% url 'core:home' %}">Inicio</a></li>
-                        <li class="contact__menu-item"><a class="contact__menu-link"
-                                href="{% url 'core:nosotros' %}">Nosotros</a></li>
-                        <li class="contact__menu-item"><a class="contact__menu-link"
-                                href="{% url 'core:servicios' %}">Servicios</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Columna 2: Información de contacto -->
-            <div class="contact__info-container">
-                <div class="contact__info">
-                    <h2 class="title__services">Contacto</h2>
-                    <ul class="contact__list">
-                        <li><strong>Email:</strong> <a href="mailto:contacto@Ingditai.cl">contacto@Ingditai.cl</a></li>
-                        <li><strong>Teléfono:</strong>+56 9 32654361 </li>
-                        <li><strong>Ubicación:</strong> Santiago, Chile</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Año: lo colocamos justo abajo de ambos bloques -->
-        <p class="layout__year">Ingeniería DITAI <span>&copy;</span> <span id="current-year"></span></p>
-    </section>
-
+</section>
 
 </main>
 

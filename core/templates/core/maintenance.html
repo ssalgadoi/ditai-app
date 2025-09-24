@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Site Under Maintenance</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-family: 'Helvetica Neue', sans-serif;
+                color: #fff;
+                text-align: center;
+                background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+                background-size: cover;
+            }
+
+            .logo {
+                max-width: 200px;
+                margin-bottom: 30px;
+            }
+
+            .box {
+                background: rgba(0, 0, 0, 0.6);
+                padding: 40px;
+                border-radius: 12px;
+                backdrop-filter: blur(5px);
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 1.2rem;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="box">
+            <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="logo">
+            <h1>Volveremos pronto</h1>
+            <p>Nuestro sitio web se encuentra en mantenimiento programado.</p>
+            <p>Gracias por su paciencia.</p>
+
+        </div>
+    </body>
+
+</html>

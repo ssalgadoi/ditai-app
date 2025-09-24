@@ -38,7 +38,7 @@
                             <a class="nav-link" href="{% url 'core:nosotros' %}">Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'core:servicios' %}">Proyectos</a>
+                            <a class="nav-link" href="{% url 'core:servicios' %}">Servicios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'core:contacto' %}">Contacto</a>
@@ -48,19 +48,16 @@
                 </div>
             </div>
         </nav>
-
-
-
-
-
+        
         <main>
             {% block content %}{% endblock %}
         </main>
 
 
-        <button href="{% url 'core:home' %}" id="scrollToTopBtn" class="scroll-to-top-btn" onclick="scrollToTop()">
+        <button id="scrollToTopBtn" class="scroll-to-top-btn" data-home-url="{% url 'core:home' %}">
             <i class="fa-solid fa-arrow-up"></i>
         </button>
+
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
         <script src="{% static 'js/index.js' %}"></script>
